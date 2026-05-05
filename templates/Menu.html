@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Sistema de Endereçamento</title>
+
+    <!-- RESPONSIVIDADE -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+    body {
+        background-color: #2f3542;
+        font-family: Arial, sans-serif;
+        padding: 15px;
+        margin: 0;
+    }
+
+    .container {
+        background: #ffffff;
+        padding: 25px;
+        border-radius: 12px;
+        max-width: 600px;
+        margin: auto;
+        text-align: center;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    }
+
+    h1 {
+        color: #f2c300;
+        margin-bottom: 25px;
+        font-size: 24px;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 16px;
+        margin: 10px 0;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    .enderecamento {
+        background-color: #f2c300;
+    }
+
+    .retirada {
+        background-color: #2ed573;
+        color: #fff;
+    }
+
+    .consulta {
+        background-color: #1e90ff;
+        color: #fff;
+    }
+
+    .btn:hover {
+        transform: scale(1.02);
+        opacity: 0.95;
+    }
+
+    /* TABLET */
+    @media (max-width: 768px) {
+        .container {
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 20px;
+        }
+
+        .btn {
+            font-size: 15px;
+            padding: 14px;
+        }
+    }
+
+    /* CELULAR */
+    @media (max-width: 480px) {
+        body {
+            padding: 10px;
+        }
+
+        .container {
+            padding: 18px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            font-size: 18px;
+        }
+
+        .btn {
+            font-size: 14px;
+            padding: 13px;
+        }
+    }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>📦 Sistema de Controle Importados</h1>
+
+    <a href="/enderecamento">
+        <button class="btn enderecamento">
+            📥 Endereçamento
+        </button>
+    </a>
+
+    <a href="/retirada">
+        <button class="btn retirada">
+            🚛 Ressuprimento / Retirada
+        </button>
+    </a>
+
+    <a href="/consultar">
+        <button class="btn consulta">
+            🔎 Consulta de Container
+        </button>
+    </a>
+
+</div>
+
+</body>
+</html>
+

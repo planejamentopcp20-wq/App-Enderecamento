@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ titulo }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+    body {
+        background-color: #2f3542;
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        padding: 15px;
+    }
+    .box {
+        background: #fff;
+        padding: 30px;
+        border-radius: 12px;
+        max-width: 400px;
+        width: 100%;
+        text-align: center;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    }
+    h2 { color: #2f3542; font-size: 22px; }
+    p { color: #555; font-size: 15px; }
+    a button {
+        margin-top: 20px;
+        width: 100%;
+        padding: 14px;
+        background: #f2c300;
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        font-size: 15px;
+        cursor: pointer;
+    }
+    </style>
+</head>
+<body>
+<div class="box">
+    <h2>{{ titulo }}</h2>
+    <p>{{ mensagem | safe }}</p>
+    <a href="{{ voltar }}"><button>Voltar</button></a>
+</div>
+</body>
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Endereçamento de Pedido</title>
+
+    <!-- RESPONSIVIDADE -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+    body {
+        background-color: #2f3542;
+        font-family: Arial, sans-serif;
+        padding: 15px;
+        margin: 0;
+        color: #333;
+    }
+
+    .pedido {
+        background: #ffffff;
+        padding: 20px;
+        border-radius: 12px;
+        max-width: 900px;
+        margin: auto;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    }
+
+    h2 {
+        text-align: center;
+        color: #f2c300;
+        margin-bottom: 20px;
+        font-size: 22px;
+    }
+
+    .section {
+        border-left: 4px solid #f2c300;
+        padding-left: 12px;
+        margin-bottom: 20px;
+    }
+
+    .section-title {
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: #2f3542;
+        font-size: 14px;
+    }
+
+    label {
+        font-size: 13px;
+        font-weight: bold;
+        display: block;
+        margin-top: 10px;
+    }
+
+    input, select {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+    }
+
+    .row {
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .row > div {
+        flex: 1;
+    }
+
+    button {
+        width: 100%;
+        padding: 14px;
+        background-color: #f2c300;
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 20px;
+        font-size: 15px;
+    }
+
+    .btn-add {
+        background-color: #2ed573;
+    }
+
+    .btn-voltar {
+        background-color: #2f3542;
+        color: #fff;
+    }
+
+    /* TABLET */
+    @media (max-width: 768px) {
+        .row {
+            flex-direction: column;
+        }
+
+        h2 {
+            font-size: 20px;
+        }
+    }
+
+    /* CELULAR */
+    @media (max-width: 480px) {
+        body {
+            padding: 10px;
+        }
+
+        .pedido {
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        h2 {
+            font-size: 18px;
+        }
+
+        input, select {
+            font-size: 13px;
+            padding: 9px;
+        }
+
+        button {
+            padding: 13px;
+            font-size: 14px;
+        }
+    }
+    </style>
+
+    <script>
+    function adicionarLinha() {
+        let container = document.getElementById("linhas-artigos");
+
+        let novaLinha = document.createElement("div");
+        novaLinha.classList.add("row");
+
+        novaLinha.innerHTML = `
+            <div>
+                <label>Artigo</label>
+                <input name="artigo[]" required>
+            </div>
+
+            <div>
+                <label>Qtd</label>
+                <input type="number" name="qtd_artigo[]" min="1" required>
+            </div>
+        `;
+
+        container.appendChild(novaLinha);
+    }
+    </script>
+
+</head>
+
+<body>
+
+<div class="pedido">
+
+    <h2>Endereçamento de Pedido</h2>
+
+    <form action="/salvar" method="POST">
+
+        <div class="section">
+            <div class="section-title">Dados do Pedido</div>
+
+            <label>Pedido</label>
+            <input name="pedido" required>
+
+            <div class="row">
+                <div>
+                    <label>Data do Endereçamento</label>
+                    <input type="date" name="data_do_enderecamento" required>
+                </div>
+
+                <div>
+                    <label>Hora do Endereçamento</label>
+                    <input type="time" name="hora_inicio" required>
+                </div>
+            </div>
+
+            <label>Qtd de Pallet</label>
+            <input type="number" name="qtd_pallet" required>
+
+            <label>Departamento</label>
+            <select name="departamento" required>
+                <option value="">Selecione</option>
+                <option>Lar/Têxtil</option>
+                <option>Vestuário</option>
+                <option>Nacional</option>
+            </select>
+
+            <label>Endereço</label>
+            <input name="endereco" required>
+
+            <label>Chapa do Responsável</label>
+            <input name="responsavel" placeholder="Ex: 12345" required>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Artigos</div>
+
+            <div id="linhas-artigos">
+                <div class="row">
+                    <div>
+                        <label>Artigo</label>
+                        <input name="artigo[]" required>
+                    </div>
+
+                    <div>
+                        <label>Qtd</label>
+                        <input type="number" name="qtd_artigo[]" min="1" required>
+                    </div>
+                </div>
+            </div>
+
+            <button type="button" class="btn-add" onclick="adicionarLinha()">
+                + Adicionar linha
+            </button>
+        </div>
+
+        <button type="submit">Salvar</button>
+
+    </form>
+
+</div>
+
+</body>
+</html>
+

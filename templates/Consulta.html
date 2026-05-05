@@ -1,0 +1,248 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Consulta de Pedido</title>
+
+    <!-- RESPONSIVIDADE -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+    body {
+        background-color: #2f3542;
+        font-family: Arial, sans-serif;
+        padding: 15px;
+        margin: 0;
+        color: #333;
+    }
+
+    .pedido {
+        background: #ffffff;
+        padding: 20px;
+        border-radius: 12px;
+        max-width: 1000px;
+        margin: auto;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    }
+
+    h2 {
+        text-align: center;
+        color: #f2c300;
+        margin-bottom: 20px;
+        font-size: 22px;
+    }
+
+    .section {
+        border-left: 4px solid #f2c300;
+        padding-left: 12px;
+        margin-bottom: 20px;
+    }
+
+    .section-title {
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: #2f3542;
+        font-size: 14px;
+    }
+
+    label {
+        font-size: 13px;
+        font-weight: bold;
+        display: block;
+        margin-top: 10px;
+    }
+
+    input {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+    }
+
+    button {
+        width: 100%;
+        padding: 14px;
+        background-color: #f2c300;
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 20px;
+        font-size: 15px;
+    }
+
+    button:hover {
+        background-color: #d9ad00;
+    }
+
+    .btn-voltar {
+        background-color: #2f3542;
+        color: #fff;
+        margin-top: 10px;
+    }
+
+    .resultado {
+        margin-top: 25px;
+        background: #f1f2f6;
+        padding: 15px;
+        border-radius: 8px;
+    }
+
+    /* 🔥 RESPONSIVO PRA TABELA */
+    .table-container {
+        overflow-x: auto;
+        margin-top: 10px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 600px; /* evita quebrar layout */
+    }
+
+    table, th, td {
+        border: 1px solid #ccc;
+    }
+
+    th, td {
+        padding: 8px;
+        text-align: center;
+        font-size: 13px;
+    }
+
+    th {
+        background-color: #f2c300;
+    }
+
+    /* TABLET */
+    @media (max-width: 768px) {
+        h2 {
+            font-size: 20px;
+        }
+    }
+
+    /* CELULAR */
+    @media (max-width: 480px) {
+        body {
+            padding: 10px;
+        }
+
+        .pedido {
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        h2 {
+            font-size: 18px;
+        }
+
+        input {
+            font-size: 13px;
+            padding: 9px;
+        }
+
+        button {
+            padding: 13px;
+            font-size: 14px;
+        }
+    }
+    </style>
+</head>
+
+<body>
+
+<div class="pedido">
+
+    <h2>Consulta de Pedido</h2>
+
+    <form action="/consultar" method="POST">
+
+        <div class="section">
+            <div class="section-title">Buscar Pedido</div>
+
+            <label>Pedido</label>
+            <input name="pedido" placeholder="Digite o número do pedido" required>
+
+            <label>Artigo (opcional)</label>
+            <input name="artigo" placeholder="Digite o artigo">
+        </div>
+
+        <button type="submit">Pesquisar</button>
+
+    </form>
+
+    <!-- RESULTADO -->
+    {% if dados %}
+    <div class="resultado">
+        <h3>📦 Dados do Pedido</h3>
+
+        <div class="table-container">
+            <table>
+                <tr>
+                    <th>Pedido</th>
+                    <th>Artigo</th>
+                    <th>Endereço</th>
+                    <th>Saldo</th>
+                    <th>Status</th>
+                    <th>Departamento</th>
+                </tr>
+
+                {% for d in dados %}
+                <tr>
+                    <td>{{ d.Pedido }}</td>
+                    <td>{{ d.Artigo }}</td>
+                    <td>{{ d.Endereco }}</td>
+                    <td>{{ d.Qtd_Saldo }}</td>
+                    <td>{{ d.Status }}</td>
+                    <td>{{ d.Departamento }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    {% endif %}
+
+    {% if historico %}
+    <div class="resultado">
+        <h3>📜 Histórico de Movimentações</h3>
+
+        <div class="table-container">
+            <table>
+                <tr>
+                    <th>Artigo</th>
+                    <th>Data</th>
+                    <th>Hora</th>
+                    <th>Retirado</th>
+                    <th>Saldo</th>
+                    <th>Destino</th>
+                </tr>
+
+                {% for h in historico %}
+                <tr>
+                    <td>{{ h.Artigo }}</td>
+                    <td>{{ h.Data }}</td>
+                    <td>{{ h.Hora }}</td>
+                    <td>{{ h.Qtd_Retirada }}</td>
+                    <td>{{ h.Saldo_Apos }}</td>
+                    <td>{{ h.Destino }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    {% endif %}
+
+    <a href="/">
+        <button type="button" class="btn-voltar">
+            ⬅ Menu Inicial
+        </button>
+    </a>
+
+</div>
+
+</body>
+</html>
+
